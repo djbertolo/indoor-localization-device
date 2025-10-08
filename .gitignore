@@ -1,0 +1,33 @@
+# LaTeX temporary files
+*.aux
+*.acn
+*.acr
+*.alg
+*.glg
+*.glo
+*.gls
+*.ist
+*.fls
+*.log
+*.lof
+*.lot
+*.out
+*.toc
+*.synctex.gz
+*.fdb_latexmk
+
+# Bibliography files
+*.bbl
+*.blg
+
+# Files created by beamer
+*.nav
+*.snm
+*.vrb
+
+# Build directory
+_build/
+build/
+
+# Compiled PDF (optional: uncomment to ignore the output PDF)
+# *.pdf
