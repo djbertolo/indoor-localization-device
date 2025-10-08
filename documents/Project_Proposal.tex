@@ -98,7 +98,7 @@ The strength of TERI comes from the hybrid implementation of two powerful user-p
 TERI is meant to be accessible and easy to use for visually impaired users. Users will use a keypad to input a keycode in the format of A:B:CD, where A is a building or area location represented by 2 letters and B is a floor level represented by a single digit. C and D are paired together to represent the desired room number with C representing the tens-place and D representing the ones-place. This configuration of C and D allows the user to input a room number ranging from 00 to 99 by only navigating two selections ranging from 0 to 9 instead of one selection of 00 to 99. This small change allows the users maximum button presses to reach a room number to decrease from 50 to 10. A, B, C, and D are changeable through the use of the corresponding buttons. Pressing the buttons will cycle through the selections for that variable. After each change, the corresponding location of that keycode is announced through the speaker. Once the user has selected a proper destination, pressing the Go button will ask for confirmation, while pressing it a second time will commence the navigation function.
 
 % Assuming the sketch image from the PDF is saved as 'teri_sketch.png' in the same directory
-\begin{figure}[h!]
+\begin{figure}[ht!]
     \centering
     \includegraphics[width=0.8\textwidth]{user_interface_design.png}
     \caption{Sketch of Device (Labeled by Part Functionality)}
