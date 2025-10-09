@@ -31,3 +31,6 @@ build/
 
 # Compiled PDF (optional: uncomment to ignore the output PDF)
 # *.pdf
+
+# Mac specific files
+*.DS_store
