@@ -13,7 +13,7 @@ One of the most common methods of user-positioning systems is a standard Global 
 ### 2. The Solution
 TERI is a portable, battery-operated device that utilizes a hybrid approach to indoor localization. By implementing two user-positioning systems, Pedestrian Dead Reckoning (PDR) via an Inertial Measurement Unit (IMU) and WiFi Fingerprinting, and fusing their data, TERI can achieve a high degree of accuracy and precision than what a more traditional singular implementation of either technology would be capable of. The user interacts with the device through a simple, tactile keypad and receives navigational instructions via a series of distinct audio cues. This project aligns with the principles of **AI for Social Good (AI4SG)** by taking advantage of technology to create a more accessible and equitable campus environment.
 
-![This is the first prototype sketch for TERI!](/documents/user_interface_design.png)
+![This is the first prototype sketch for TERI!](/documents/project-proposal/user_interface_design.png)
 
 ---
 
