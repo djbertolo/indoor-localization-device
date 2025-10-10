@@ -1,6 +1,6 @@
-# Tactile Environment Routing Interface (TERI)
+# Turn-by-turn Indoor Routing Engine (TIRE)
 
-The Tactile Environment Routing Interface (TERI) is a handheld navigation device used to provide real-time indoor guidance. It's primary focus is to serve students with visual impairments navigating new and complex environments such as a university campus. TERI aims to promote user independence and navigational confidence by reducing a reliance on sighted guides or memorization of routes.
+The # Turn-by-turn Indoor Routing Engine (TIRE) is a handheld navigation device used to provide real-time indoor guidance. It's primary focus is to serve students with visual impairments navigating new and complex environments such as a university campus. TIRE aims to promote user independence and navigational confidence by reducing a reliance on sighted guides or memorization of routes.
 
 This project is being developed as a Senior Capstone for Computer Engineering Design at **California State University, San Bernardino**, under the guidance of Dr. Yunfei Hou.
 
@@ -8,12 +8,12 @@ This project is being developed as a Senior Capstone for Computer Engineering De
 
 ## 🎯 Project Overview
 ### 1. The Problem
-One of the most common methods of user-positioning systems is a standard Global Positioning System (GPS). However, GPS becomes largely ineffective indoors due to the signal interference caused by the building's construction. The level of precision and accuracy for a user's location required for indoor navigation demands another solution. The common method of indoor navigation is the use of visual cues, signs indicating the range of room numbers in each hall, signs above each door to indicate location, and more. However, these visual cues are not useable by those with visual impairment. TERI's solution is to provide a reliable indoor positioning and navigation system that does not require visual cues for operation.
+One of the most common methods of user-positioning systems is a standard Global Positioning System (GPS). However, GPS becomes largely ineffective indoors due to the signal interference caused by the building's construction. The level of precision and accuracy for a user's location required for indoor navigation demands another solution. The common method of indoor navigation is the use of visual cues, signs indicating the range of room numbers in each hall, signs above each door to indicate location, and more. However, these visual cues are not useable by those with visual impairment. TIRE's solution is to provide a reliable indoor positioning and navigation system that does not require visual cues for operation.
 
 ### 2. The Solution
-TERI is a portable, battery-operated device that utilizes a hybrid approach to indoor localization. By implementing two user-positioning systems, Pedestrian Dead Reckoning (PDR) via an Inertial Measurement Unit (IMU) and WiFi Fingerprinting, and fusing their data, TERI can achieve a high degree of accuracy and precision than what a more traditional singular implementation of either technology would be capable of. The user interacts with the device through a simple, tactile keypad and receives navigational instructions via a series of distinct audio cues. This project aligns with the principles of **AI for Social Good (AI4SG)** by taking advantage of technology to create a more accessible and equitable campus environment.
+TIRE is a portable, battery-operated device that utilizes a hybrid approach to indoor localization. By implementing two user-positioning systems, Pedestrian Dead Reckoning (PDR) via an Inertial Measurement Unit (IMU) and Bluetooth Low Energy (BLE) Fingerprinting, and fusing their data, TIRE can achieve a high degree of accuracy and precision than what a more traditional singular implementation of either technology would be capable of. The user interacts with the device through a simple, tactile keypad and receives navigational instructions via a series of distinct audio cues. This project aligns with the principles of **AI for Social Good (AI4SG)** by taking advantage of technology to create a more accessible and equitable campus environment.
 
-![This is the first prototype sketch for TERI!](/documents/project-proposal/user_interface_design.png)
+![This is the first prototype sketch for TIRE!](/documents/project-proposal/user_interface_design.png)
 
 ---
 
@@ -26,7 +26,7 @@ TERI is a portable, battery-operated device that utilizes a hybrid approach to i
 
 - **"Where Am I?" Function:** A dedicated button that allows the user to get an immediate audio announcement of their current location based on the nearest identifiable RP.
 
-- **Portable & Self-Contained Design:** A handheld, battery-operated form factor designed for all-day use. TERI Relies primarily on its own sensors and internalized map data to reduce dependence on external systems.
+- **Portable & Self-Contained Design:** A handheld, battery-operated form factor designed for all-day use. TIRE Relies primarily on its own sensors and internalized map data to reduce dependence on external systems.
 
 ---
 
@@ -45,7 +45,7 @@ TERI is a portable, battery-operated device that utilizes a hybrid approach to i
 
 - **Core Algorithms:** Extended Kalman Filter (EKF), k-Nearest Neighbors (k-NN), A* Search Algorithm
 
-- **Key Libraries:** `NumPy` (for EKF/k-NN math), `RPi.GPIO` (for hardware interface)
+- **Key Libraries:** `NumPy` (for EKF/k-NN math), `RPi.GPIO` (for hardware interface), `BluePy` (for BLE detection)
 
 - **Version Control:** Git & GitHub
 
