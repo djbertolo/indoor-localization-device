@@ -1,0 +1,44 @@
+{
+  "reference_points": [
+    {
+      "id": "JB-3-HW-CENTER",
+      "coordinates": {
+        "x": 50,
+        "y": 20
+      },
+      "descriptor": "You are in the main hallway.",
+      "ble_fingerprint": [
+        {
+          "mac_address": "C0:98:E5:54:00:01",
+          "avg_rssi": -65
+        }
+      ]
+    },
+    {
+      "id": "JB-355",
+      "coordinates": {
+        "x": 50,
+        "y": 35
+      },
+      "descriptor": "You are outside room 355.",
+      "ble_fingerprint": [
+        {
+          "mac_address": "C0:98:E5:54:00:01",
+          "avg_rssi": -58
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "from": "JB-3-HW-CENTER",
+      "to": "JB-355",
+      "distance": 15.0
+    },
+    {
+      "from": "JB-355",
+      "to": "JB-3-HW-CENTER",
+      "distance": 15.0
+    }
+  ]
+}
