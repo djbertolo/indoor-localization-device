@@ -10,6 +10,9 @@ This log serves as the official research journal for the project. Its purpose is
 
 ### ✅ Progress & Accomplishments
 - United Nations' Sustainable Development Goal (SDG) 10, "Reduced Inequalities", was chosen as the SDG that TIRE most directly aligns with. Justification for this alignment was added to the [README.md](/README.md#2-the-solution).
+- Added NavigationGraph class
+- Added A* algorithm pathfinding
+- Added BLE fingerprinting system
 
 ### 🤔 Insights & Discoveries
 
