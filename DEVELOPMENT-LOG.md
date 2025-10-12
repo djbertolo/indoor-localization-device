@@ -4,6 +4,21 @@ This log serves as the official research journal for the project. Its purpose is
 
 ---
 
+## Log Entry: October 12<sup>th</sup> - October 18<sup>th</sup>, 2025
+
+**Authors(s): Dominic Bertolo**
+
+### ✅ Progress & Accomplishments
+- United Nations' Sustainable Development Goal (SDG) 10, "Reduced Inequalities", was chosen as the SDG that TIRE most directly aligns with. Justification for this alignment was added to the [README.md](/README.md#2-the-solution).
+
+### 🤔 Insights & Discoveries
+
+### 💡 Ideas & Next Steps
+- **Idea:** While the United Nations' SDG 10, "Reduced Inequalities", is explained in the [README.md](/README.md#2-the-solution), a more formal defense for TIRE's intellectual merit might be beneficial in a revised version of a report about the project.
+
+### ⚠️ Challenges & Blockers
+- **Challenge:** The justification for TIRE's intellectual merit will be difficult as the world of assistive technology is not lacking in activity and neither is the subject of indoor-localization methods. Additionally, the need to defend both its intellectual merit as a technical project on cyber-physical tools and its intellectual merit as a UN SDG and social good requires an equally deep dive into both sections to understand where exactly is TIRE's niche.
+
 ## Log Entry: October 5<sup>th</sup> - October 11<sup>th</sup>, 2025
 
 **Author(s): Dominic Bertolo**
