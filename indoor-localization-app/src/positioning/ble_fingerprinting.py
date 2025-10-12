@@ -1,1 +1,0 @@
-# Logic for k-NN matching of BLE signals

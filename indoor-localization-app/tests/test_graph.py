@@ -1,1 +1,0 @@
-# Unit tests for loading and querying the map
