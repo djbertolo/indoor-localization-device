@@ -1,44 +1,82 @@
 {
   "reference_points": [
     {
-      "id": "JB-3-HW-CENTER",
+      "id": "A",
       "coordinates": {
-        "x": 50,
-        "y": 20
+        "x": 0,
+        "y": 0
       },
-      "descriptor": "You are in the main hallway.",
-      "ble_fingerprint": [
-        {
-          "mac_address": "C0:98:E5:54:00:01",
-          "avg_rssi": -65
-        }
-      ]
+      "descriptor": "Start",
+      "ble_fingerprint": []
     },
     {
-      "id": "JB-355",
+      "id": "B",
       "coordinates": {
-        "x": 50,
-        "y": 35
+        "x": 10,
+        "y": 20
       },
-      "descriptor": "You are outside room 355.",
-      "ble_fingerprint": [
-        {
-          "mac_address": "C0:98:E5:54:00:01",
-          "avg_rssi": -58
-        }
-      ]
+      "descriptor": "Midpoint 1",
+      "ble_fingerprint": []
+    },
+    {
+      "id": "C",
+      "coordinates": {
+        "x": 30,
+        "y": 10
+      },
+      "descriptor": "Midpoint 2",
+      "ble_fingerprint": []
+    },
+    {
+      "id": "D",
+      "coordinates": {
+        "x": 40,
+        "y": 0
+      },
+      "descriptor": "End",
+      "ble_fingerprint": []
     }
   ],
   "connections": [
     {
-      "from": "JB-3-HW-CENTER",
-      "to": "JB-355",
-      "distance": 15.0
+      "from": "A",
+      "to": "B",
+      "distance": 22.3
     },
     {
-      "from": "JB-355",
-      "to": "JB-3-HW-CENTER",
-      "distance": 15.0
+      "from": "B",
+      "to": "A",
+      "distance": 22.3
+    },
+    {
+      "from": "A",
+      "to": "C",
+      "distance": 31.6
+    },
+    {
+      "from": "C",
+      "to": "A",
+      "distance": 31.6
+    },
+    {
+      "from": "B",
+      "to": "D",
+      "distance": 36.0
+    },
+    {
+      "from": "D",
+      "to": "B",
+      "distance": 36.0
+    },
+    {
+      "from": "C",
+      "to": "D",
+      "distance": 14.1
+    },
+    {
+      "from": "D",
+      "to": "C",
+      "distance": 14.1
     }
   ]
 }
