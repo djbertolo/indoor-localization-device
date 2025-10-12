@@ -1,0 +1,41 @@
+{
+  "reference_points": [
+    {
+      "id": "A",
+      "coordinates": {
+        "x": 0,
+        "y": 0
+      },
+      "descriptor": "Start",
+      "ble_fingerprint": [
+        {
+          "mac_address": "beacon_1",
+          "avg_rssi": -60
+        },
+        {
+          "mac_address": "beacon_2",
+          "avg_rssi": -85
+        }
+      ]
+    },
+    {
+      "id": "B",
+      "coordinates": {
+        "x": 10,
+        "y": 20
+      },
+      "descriptor": "Midpoint",
+      "ble_fingerprint": [
+        {
+          "mac_address": "beacon_1",
+          "avg_rssi": -80
+        },
+        {
+          "mac_address": "beacon_2",
+          "avg_rssi": -65
+        }
+      ]
+    }
+  ],
+  "connections": []
+}

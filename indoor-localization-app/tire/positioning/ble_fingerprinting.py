@@ -5,7 +5,7 @@ from pathlib import Path
 from typing import Dict, List, Optional
 
 # Import the NavigationGraph class from the other module
-from ..navigation.graph import NavigationGraph, BLEFingerprint
+from tire.navigation.graph import NavigationGraph, BLEFingerprint
 
 # Type alias for clarity: A dictionary mapping a MAC address to its RSSI value.
 LiveBLEScan = Dict[str, int]
@@ -70,54 +70,3 @@ def find_closest_rp(graph: NavigationGraph, live_scan: LiveBLEScan) -> Optional[
             closest_rp_id = rp.id
             
     return closest_rp_id
-
-# --- Example Usage ---
-if __name__ == '__main__':
-    # Use the same map from the pathfinder test.
-    dummy_map_data = {
-        "reference_points": [
-            {
-                "id": "A", "coordinates": {"x": 0, "y": 0}, "descriptor": "Start",
-                "ble_fingerprint": [
-                    {"mac_address": "beacon_1", "avg_rssi": -60},
-                    {"mac_address": "beacon_2", "avg_rssi": -85}
-                ]
-            },
-            {
-                "id": "B", "coordinates": {"x": 10, "y": 20}, "descriptor": "Midpoint",
-                "ble_fingerprint": [
-                    {"mac_address": "beacon_1", "avg_rssi": -80},
-                    {"mac_address": "beacon_2", "avg_rssi": -65}
-                ]
-            }
-        ],
-        "connections": []
-    }
-    project_root = Path(__file__).resolve().parent.parent.parent
-    dummy_filepath = str(project_root / "data" /"dummy_ble_map.json")
-    with open(dummy_filepath, 'w') as f:
-        json.dump(dummy_map_data, f, indent=2)
-
-    print("--- Testing BLE Fingerprinting ---")
-    try:
-        test_graph = NavigationGraph(dummy_filepath)
-
-        # SCENARIO 1: A scan that is very close to RP 'A'.
-        live_scan_near_A = {"beacon_1": -62, "beacon_2": -83, "beacon_3": -90}
-        
-        closest_id = find_closest_rp(test_graph, live_scan_near_A)
-        print(f"\nLive scan: {live_scan_near_A}")
-        print(f"  -> Closest RP found: {closest_id}")
-        assert closest_id == "A"
-        print("  -> Correct!")
-
-        # SCENARIO 2: A scan that is closer to RP 'B'.
-        live_scan_near_B = {"beacon_1": -78, "beacon_2": -66}
-        closest_id = find_closest_rp(test_graph, live_scan_near_B)
-        print(f"\nLive scan: {live_scan_near_B}")
-        print(f"  -> Closest RP found: {closest_id}")
-        assert closest_id == "B"
-        print("  -> Correct!")
-
-    except (FileNotFoundError, KeyError) as e:
-        print(f"An error occurred during testing: {e}")
