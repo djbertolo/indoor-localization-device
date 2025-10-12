@@ -7,7 +7,6 @@
 │       └── arrival.mp3
 │
 ├── tire/
-│   ├── __main__.py                  # Main application entry point
 │   │
 │   ├── navigation/
 │   │   ├── graph.py                 # Loads and manages the navigation graph from JSON
@@ -29,8 +28,9 @@
 ├── scripts/
 │   └── map_creator.py               # Utility script to help create the JSON map file
 │
-└── tests/
-    ├── test_pathfinder.py           # Unit tests for the A* algorithm
-    ├── test_graph.py                # Unit tests for loading and querying the map
-    └── test_ekf.py                  # Unit tests for the EKF logic with sample data
+├── tests/
+|   ├── test_pathfinder.py           # Unit tests for the A* algorithm
+|   ├── test_graph.py                # Unit tests for loading and querying the map
+|   └── test_ekf.py                  # Unit tests for the EKF logic with sample data
+└── main.py                  # Main application entry point
 ```
