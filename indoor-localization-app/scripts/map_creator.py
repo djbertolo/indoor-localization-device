@@ -1,1 +1,0 @@
-# Utility scrip to help create the JSON map file

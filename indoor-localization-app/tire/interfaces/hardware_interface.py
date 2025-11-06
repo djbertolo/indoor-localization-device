@@ -1,1 +1,0 @@
-# Defines the abstract base class for all hardware

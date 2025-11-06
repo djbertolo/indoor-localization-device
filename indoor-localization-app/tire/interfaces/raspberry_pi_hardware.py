@@ -1,1 +1,0 @@
-# Fakes sensor data for testing on a PC

@@ -1,1 +1,0 @@
-# Real hardware implementation for the Pi
