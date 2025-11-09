@@ -52,3 +52,4 @@
 
 ### Next Steps
 *Goals and focuses for next week!*
+- Configure BLE beacons
