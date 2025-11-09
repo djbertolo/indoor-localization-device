@@ -6,6 +6,8 @@
 *Overall Group Achievements!*
 - Restructuring of GitHub Repository
 - Initial draft of system specifications
+- Programming for basic functions of data processing
+- Purchase of device parts
 
 ### Individual Contributions:
 *What each member worked on!*
