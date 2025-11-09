@@ -1,0 +1,348 @@
+\documentclass[12pt]{article}
+
+\usepackage{caption}
+\usepackage{float}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{setspace}
+
+\captionsetup[figure]{labelformat=empty}
+\geometry{a4paper, margin=1in}
+\singlespacing
+\graphicspath{{images/}}
+
+\begin{document}
+
+\begin{titlepage}
+    \centering
+    
+    \vspace*{\fill}
+    
+    % --- Title ---
+    {\Huge\bfseries System Specification: \par}
+    {\Huge\bfseries Indoor Localization Device\par}
+    
+    \vspace{2cm}
+    
+    % --- Author / Group ---
+    {\Large Group: Group 5\par}
+    \vspace{1cm}
+    {\large Francisco Alvarez\par}
+    {\large Alejandro Armenta\par}
+    {\large Dominic Bertolo\par}
+    {\large Carlos Gomez\par}
+	{\large Isaac Spann\par}
+    {\large Josiah Spann\par}
+    
+    \vspace{1.5cm}
+    
+    % --- Date ---
+    {\large November 11th, 2025\par}
+    
+    \vspace*{\fill}
+\end{titlepage}
+
+% 1. THE CONCEPT
+
+\section*{The Concept}
+
+\subsection*{Overview}
+The intended system is a device that implements indoor localization techniques to aide in navigating a user within indoor spaces. The primary target audience for this device is users with visual impairments or unfamiliarity with the indoor environment they wish to navigate. The intended device aims to bridge the accessibility gap created for those with visual impairments in unfamiliar areas with audio cues that guide a user towards a destination that they have inputted.
+
+
+\subsection*{Changes from Original Specification}
+Compared to the original requirements specification, the device has changed in its user positioning system. In the original iteration, the user-position system was to be a hybrid system consisting of a Pedestrian Dead Reckoning (PDR) system and a WiFi Fingerprinting system. The new system design keeps the PDR system but replaces the WiFi Fingerprinting with Bluetooth Low Energy (BLE) Fingerprinting, favoring the use of BLE beacons as sources of signal instead of WiFi access points.
+
+% 2. INPUTS/OUTPUTS AND SYSTEM BLOCK DIAGRAM
+
+\section*{Inputs/Outputs and System Block Diagram}
+
+\subsection*{Block Diagram}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{group_block_diagram.png}
+    \caption{Group Block Diagram}
+\end{figure}
+
+\subsection*{Inputs/Outputs}
+Clearly specify the inputs and outputs for each block in the system. This should include both data and signals, as appropriate.
+
+\subsubsection*{Inertial Measurement Unit (IMU)}
+The Inertial Measurement Unit (IMU) is a module that consists of an accelerometer and a gyroscope. The accelerometer takes in an input of the user's movement and provides an output of raw acceleration data. Similarly, the gyroscope takes an input of the orientation of the user based on a fixed reference point and provides an output of an orientation offset relative to its fixed reference point.
+
+\subsubsection*{User Interface}
+The User Interface comprises of a power switch and a four-by-three keypad. The power switch has an input of the boolean state the user has set. Based on the state of the power switch, a signal will be outputted that represents the boolean state it is in. Each button of the four-by-three keypad will take an input of the boolean state of being pressed down or not. A signal from each button will be outputted to indicate the boolean state of whether it is pressed or not. The "Where Am I?" button is separately listed in the block diagram as primarily, the keypad buttons are used for inputting a destination to navigate towards. The "Where Am I" button is separate in its purpose and use compared to the other keypad buttons, but it is the same as the other keypad buttons for the input it receives and the output it provides.
+
+\subsubsection*{Bluetooth Low Energy (BLE) Beacons}
+The Bluetooth Low Energy (BLE) Beacons are one of the few components to the system that do not take an input. They have a preconfigured setting for their unique identifier, aside from this configuration, there is no input provided to the beacons. Their output is a signal containing the unique identifier of the beacon.
+
+\subsubsection*{Power Configuration}
+The power configuration determines whether the device should continue to process data. It takes an input of the signal provided by the power switch, and does not provide an output to be processed, but instead outputs the action of toggling the state of the remaining systems of the device to reflect the power configuration.
+
+\subsubsection*{Local Storage}
+The data that is locally stored on the device does not take an input as it is preconfigured and static. This data is a source of information for systems in the device to operate based on. Due to this, it can be representing as having an output that correlates to the data being accessed. In the case of the block diagram, the data being accessed is specifically the preconfigured map data to be used by the pathfinding system.
+
+\subsubsection*{Wireless Communication Module}
+The signals emitted from the BLE beacons needs to be processed in order to be interpreted by the remaining systems. Within the block diagram, this processing is visualized by taking an input of the available signals from the nearby BLE beacons, and an output of a processed form of this signal data. For this device, the processing of the signal data will be a "fingerprint" in the form of a vector containing the unique identifier attached to each signal alongside the signal strength of each signal.
+
+\subsubsection*{Positioning System}
+The positioning system is a hybrid system and takes an input from primarily two sources, the Wireless Communication Module, and the IMU's raw data in the form of acceleration and orientation. Additionally, the positioning system takes in an input of the "Where Am I?" button, providing the user's position when this button is pressed. The positioning system outputs the estimated position of a user in regards to estimated distance between reference points within the preconfigured map data.
+
+\subsubsection*{Path-finding Module}
+The path-finding module takes in input in the form of a user's estimated position, and target destination. The sources from this target destination can come from either the navigation system or the local storage containing the preconfigured map data. The position of the user is provided by the positioning system. The path-finding module outputs a "path" of the reference points needed to arrive at the destination, along with guidances that will guide the user to each reference point.
+
+\subsubsection*{Navigation System}
+The navigation system takes an input from primarily three sources, power configuration, path-finding module, and user keypad presses. The power configuration dictates whether or not the navigation system should be active and processing data. The path-finding module provides information on how the navigation system is to guide the user to reach the destination inputted by the keypad. The output of the navigation system is the corresponding guidance needed to be provided to the user.
+
+\subsubsection*{Audio Guidance}
+The audio guidance module takes an input from the navigation system as to which guidance needs to be provided to the user for that moment in time. The output of this module is the corresponding audio file to be played to the speaker.
+
+\subsubsection*{Speaker}
+The speaker takes an input of the corresponding audio file and plays the sound for the user to hear.
+
+% 3. SPECIFICATION OF THE BLOCKS
+
+\section*{Specification of the Blocks}
+
+\subsection*{Functionality}
+
+\subsubsection*{User Interface}
+The user interface is the collection of user input sources, including the following: a power configuration switch, "Where Am I?" button, "Current Selection" button, "Start Navigation" button, and eight keycode modifiers corresponding to four columns, each with an increment and decrement for each column. The user interface along with the speaker are the primary user-facing features of the indoor navigation device. By setting the power configuration switch to either boolean state of on or off, the system's software will be started or terminated. By pressing any of the keycode modifiers, the user's current selection of a destination will change along with directing the audio guidance manager to indicate the new updated value via an audio cue. By pressing the "Current Selection" button, the user is able to receive an audio cue that presents the entirety of the current destination selection. By pressing the "Start Navigation" button, the current keycode selection will be passed to the navigation system to obtain the needed audio guidance cues to provide to the user via the speaker in order to arrive to their desired destination. By pressing the "Where Am I?" button, at any point regardless of state of navigation, the user can here an audio cue that presents the most likely reference point to which a user is closest.
+
+\subsubsection*{Inertial Measurement Unit (IMU)}
+The Inertial Measurement Unit (IMU) is a module that contains three-axis accelerometer and a three-axis gyroscope. Based off of the movement of the module, and by extension the movement of the user, it provides the raw acceleration data in each of the three axes measured alongside the raw orientation data in each of the three axes measured. This data is then passed to the Positioning System in order to be filtered, processed, and interpreted.
+
+\subsubsection*{Bluetooth Low Energy (BLE) Beacons}
+The Bluetooth Low Energy (BLE) beacons are a collection of preconfigured BLE sensors that emit a static signal that contains their unique identifier. They are configured to all emit a signal at the same desired strength
+
+\subsubsection*{Power Configuration}
+The power configuration is the authority for whether the other systems on the device should be running such as the navigation system, positioning system, wireless communication system, and audio guidance system.
+
+\subsubsection*{Nagivation System}
+The navigation system acts as the central controller that determines which audio guidance messages should be delivered to the user. It receives the current user position from the positioning system, the calculated route from the path-finding module, and user input from the keypad interface. Its primary role is to interpret these inputs and select appropriate instructions such as “turn left,” “continue straight,” or “you have arrived.” During navigation, the system continuously updates the guidance based on real-time position changes. If the user presses “Start Navigation,” the system initializes a new navigation session; if “Where Am I?” is pressed, the system temporarily interrupts navigation to provide the user’s current location.
+
+\subsubsection*{Path-finding Module}
+The path-finding module computes an optimal path from the user’s current estimated location to a specified destination. Using preconfigured indoor map data from local storage, the module identifies reference nodes (hallways, intersections, doorways) and determines the shortest or most accessible route. It also generates step-by-step guidance instructions corresponding to each segment of the path. This module ensures that routes avoid restricted areas and remain consistent with accessibility considerations.
+
+\subsubsection*{Positioning System}
+The positioning system fuses data from the IMU and BLE fingerprinting module to estimate the user’s real-time position. IMU acceleration and orientation values provide dead-reckoning estimates, while BLE fingerprints provide environmental calibration points. The system an Extended-Kalman Filter to reduce accumulated PDR drift. When the “Where Am I?” button is pressed, this system outputs the closest known reference point based on current estimates.
+
+\subsubsection*{Wireless Communication Module}
+The wireless communication module processes incoming BLE signals gathered by the device’s receiver. It identifies all beacon transmissions in range, extracts each beacon’s unique identifier, and measures its signal strength (RSSI). These values form the BLE fingerprint vector forwarded to the positioning system. This module handles all low-level BLE communication protocols and filtering of sporadic, noisy, or irrelevant signals.
+
+\subsubsection*{Local Storage}
+The local storage module contains static, preconfigured information necessary for navigation. This includes indoor map topology, node labels, distances between reference points, and audio file mappings. The module outputs this data when requested by the path-finding module or navigation system. It remains read-only during normal operation.
+
+\subsubsection*{Speaker}
+The speaker outputs the audio cues selected by the navigation system. It functions as the final output interface for user guidance, converting the selected digital audio file into sound waves. Audio cues include button confirmations, directional instructions, destination confirmations, and location announcements.
+
+\subsection*{Technical Specifications}
+\subsubsection*{Power Requirements}
+The Raspberry Pi 5, according to the Raspberry Pi documentation, requires a minimum 5V/5A power source for maximum achievable performance. The BLE beacons, according to the Fermion specifications, each require a 3.3V power source, with the recommendation of a CR2032 battery. General power consumption will depend on the boolean state of the power configuration in addition to the frequency of audio cues provider through the speaker module.
+
+\subsubsection*{Communication Protocols}
+The IMU to be used communicates through the I$^2$C communication protocol for its raw accelerometer and gyroscope data. The BLE beacons will emit a 2.4 GHz bandwidth signal and be read by the wireless communication module.
+
+\subsubsection*{Data Flow and Processing}
+The IMU will constantly be receiving and emitting data, as well as the BLE Beacons. When the power configuration is set to run the navigation and other relevant systems, the device will process this data to be interpreted. The accelerometer and gyroscope data will be used to calculate an estimated stride length, step count, and heading direction of the user. This processed data is then interpreted by the positioning system to determine an estimated progress along the desired path. The wireless communication module will occasionally produce an update wireless fingerpint based on the raw signal strength of each BLE beacon. This fingerprint will then be interpreted alongside the estimated position based on the pedestrian dead recknoning prediction. Wireless fingerprinting can additionally be received on an event-based call to allow the user to obtain an accurate estimate of a position relative to a reference point. In the context of this device, this feature exists for the implementation of the "Where Am I?" button.
+
+\subsection*{Inputs/Outputs}
+A more detailed explanation for the following inputs and outputs can be found in the earlier section of "Inputs/Outputs and System Block Diagram".
+\par
+\bigskip
+\noindent
+Navigation System
+\begin{itemize}
+	\item Inputs
+	\begin{itemize}
+		\item Path instructions from path-finding module
+		\item User inputs from keypad
+		\item Power configuration signal
+		\item Real-time user position
+	\end{itemize}
+	\item Outputs
+	\begin{itemize}
+		\item Guidance instructions $\rightarrow$ Audio Guidance module
+	\end{itemize}
+\end{itemize}
+\par
+\bigskip
+\noindent
+Path-finding Module
+\begin{itemize}
+	\item Inputs
+	\begin{itemize}
+		\item Estimated position
+		\item Destination keycode
+		\item Map data from local storage
+	\end{itemize}
+	\item Outputs
+	\begin{itemize}
+		\item Reference-point path
+		\item Segment-by-segment guidance cues
+	\end{itemize}
+\end{itemize}
+\par
+\bigskip
+\noindent
+Positioning System
+\begin{itemize}
+	\item Inputs
+	\begin{itemize}
+		\item IMU acceleration and orientation
+		\item BLE fingerprint vector
+		\item "Where Am I?" button press
+	\end{itemize}
+	\item Outputs
+	\begin{itemize}
+		\item Estimated user coordinates
+		\item Closest map reference node
+	\end{itemize}
+\end{itemize}
+\par
+\bigskip
+\noindent
+Wireless Communication Module
+\begin{itemize}
+	\item Inputs
+	\begin{itemize}
+		\item Raw BLE signals
+	\end{itemize}
+	\item Outputs
+	\begin{itemize}
+		\item Processed BLE fingerprint vector (ID + RSSI)
+	\end{itemize}
+\end{itemize}
+\par
+\bigskip
+\noindent
+Local Storage
+\begin{itemize}
+	\item Inputs
+	\begin{itemize}
+		\item Access requests from path-finding and navigation modules
+	\end{itemize}
+	\item Outputs
+	\begin{itemize}
+		\item Node definitions
+		\item Audio file index lookup
+	\end{itemize}
+\end{itemize}
+\par
+\bigskip
+\noindent
+Speaker
+\begin{itemize}
+	\item Inputs
+	\begin{itemize}
+		\item Digital audio file
+	\end{itemize}
+	\item Outputs
+	\begin{itemize}
+		\item Audible Sound
+	\end{itemize}
+\end{itemize}
+
+% 4. SYSTEM DESCRIPTION
+
+\section*{System Description}
+
+\subsection*{Block Interaction}
+The system operates as a sequential pipeline that incorporates real-time feedback from various sources. While the power configuration is set to enable to device, the system forms a closed loop where user position estimates are contiuously made in order to provide proper guidance until destination is reached.
+
+\begin{enumerate}
+	\item User Input $\rightarrow$ Navigation System
+	\begin{itemize}
+		\item User powers device on using the power switch
+		\item Keypad inputs define destination or request location information
+	\end{itemize}
+	\item BLE Beacons + IMU $\rightarrow$ Wireless Communication + Positioning System
+	\begin{itemize}
+		\item IMU constantly streams raw acceleration/orientation data
+		\item BLE receiver collects beacon identifiers and RSSI values
+		\item Positioning systems both data streams to estimate user's location
+	\end{itemize}
+	\item Position Estimate + Destination $\rightarrow$ Path-finding Module
+	\begin{itemize}
+		\item When a destination is entered, the path-finding module accessess map data from local storage
+		\item Computes optimal path across reference nodes from position estimate to destination
+	\end{itemize}
+	\item Path + Position Updates $\rightarrow$ Navigation System
+	\begin{itemize}
+		\item Navigation system selects appropriate instructions as the user moves
+		\item Handles interuptions such as the "Where Am I?" request
+	\end{itemize}
+	\item Instruction $\rightarrow$ Audio Guidance $\rightarrow$ Speaker
+	\begin{itemize}
+		\item Guidance is converted into audio playback and delivered through the speaker
+	\end{itemize}
+\end{enumerate}
+
+\subsection*{Schematic Diagram}
+You are encouraged to include a Schematic Diagram (e.g. using OrCAD, from CSE 4030 Circuit Analysis): Provide a schematic diagram that visually explains how the blocks are interconnected. This should clearly show the wiring, signal flow, and interdependencies between system components.
+
+% 5. SYSTEM DESCRIPTION
+
+\section*{System Analysis}
+
+\subsection*{Testing and Results}
+Present your analysis of the system's performance. Include figures, tables, or graphs to summarize the results from your tests.
+
+\subsection*{Analysis of Key Metrics}
+Discuss how well the system meets the specifications, including performance, accuracy, efficiency, and any relevant key metrics.
+
+\subsection*{Problem Areas}
+Highlight any potential issues or problem areas encountered during testing, along with recommendations for improvements.
+
+\section*{Individual Block Diagrams}
+
+\subsection*{Francisco Alvarez}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{francisco_alvarez_block_diagram.png}
+    \caption{Francisco Alvarez's Block Diagram}
+\end{figure}
+
+\subsection*{Alejandro Armenta}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{alejandro_armenta_block_diagram.png}
+    \caption{Alejandro Armenta's Block Diagram}
+\end{figure}
+
+\subsection*{Dominic Bertolo}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{dominic_bertolo_block_diagram.png}
+    \caption{Dominic Bertolo's Block Diagram}
+\end{figure}
+
+\subsection*{Carlos Gomez}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{carlos_gomez_block_diagram.png}
+    \caption{Carlos Gomez's Block Diagram}
+\end{figure}
+
+\subsection*{Isaac Spann}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{isaac_spann_block_diagram.png}
+    \caption{Isaac Spann's Block Diagram}
+\end{figure}
+
+\subsection*{Josiah Spann}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{josiah_spann_block_diagram.png}
+    \caption{Josiah Spann's Block Diagram}
+\end{figure}
+
+\end{document}
