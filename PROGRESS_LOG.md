@@ -37,8 +37,11 @@
 
 #### Isaac Spann
 | Contribution | Date | Day of Week | Repository Commit ID |
-| - | - | - | - |
-| | | | |
+|- | - | - | - |
+| Did a literature review on technical difficulties regarding signal inconsistency on Wifi-Fingerprinting. Added a article on a google doc talking about this issue and explained how they resolved it | |11/9|
+ |Sunday 11/9| | Added a article on a google doc talking about this issue and explained how they resolved it. 
+| Repository Commit ID: 57aba0b  (https://github.com/djbertolo/indoor-localization-device/compare/main...ispann360-coder:indoor-localization-device:patch-3) |
+| | | |
 
 #### Josiah Spann
 | Contribution | Date | Day of Week | Repository Commit ID |
