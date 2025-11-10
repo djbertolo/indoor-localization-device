@@ -44,7 +44,8 @@
 | Contribution | Date | Day of Week | Repository Commit ID |
 | - | - | - | - |
 | | | | |
-
+| Looked at articles and did a literature review regarding technical difficulties (gyroscope drift issue) that can occur from TIRE | 11/9| 
+| Sunday | Repository Commit Id: [5d57bO] (https://github.com/djbertolo/indoor-localization-device/compare/main...Josiah352:indoor-localization-device:patch-3) |
 ### Challenges / Issues:
 *Problems encountered and support needed!*
 - System Specifications requires System Analysis yet the system remains unfinished and unable to be tested according to requirement specifications and system specifications indicated requirements.
