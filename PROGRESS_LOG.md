@@ -33,12 +33,15 @@
 #### Carlos Gomez
 | Contribution | Date | Day of Week | Repository Commit ID |
 | - | - | - | - |
-| | | | |
+|  
+| | | |
 
 #### Isaac Spann
 | Contribution | Date | Day of Week | Repository Commit ID |
 | - | - | - | - |
-| | | | |
+|Revised my inddividual block diagram and submitted it to the grou on Thursday 11/6. 
+|Am working on my individual schematic diagram and will try to get it ib by Monday 11/10. 
+| | |
 
 #### Josiah Spann
 | Contribution | Date | Day of Week | Repository Commit ID |
