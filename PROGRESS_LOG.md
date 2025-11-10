@@ -1,5 +1,52 @@
 # Weekly Progress Log
 
+## Week 12 (Nov 10 - 16)
+
+### Tasks Completed:
+*Overall Group Achievements!*
+
+
+### Individual Contributions:
+*What each member worked on!*
+
+#### Francisco Alvarez
+| Contribution | Date | Day of Week | Repository Commit ID |
+| - | - | - | - |
+
+
+#### Alejandro Armenta
+| Contribution | Date | Day of Week | Repository Commit ID |
+| - | - | - | - |
+
+
+#### Dominic Bertolo
+| Contribution | Date | Day of Week | Repository Commit ID |
+| - | - | - | - |
+
+#### Carlos Gomez
+| Contribution | Date | Day of Week | Repository Commit ID |
+| - | - | - | - |
+
+
+#### Isaac Spann
+| Contribution | Date | Day of Week | Repository Commit ID |
+| - | - | - | - |
+
+
+#### Josiah Spann
+| Contribution | Date | Day of Week | Repository Commit ID |
+| - | - | - | - |
+
+
+### Challenges / Issues:
+*Problems encountered and support needed!*
+
+
+### Next Steps
+*Goals and focuses for next week!*
+
+---
+
 ## Week 11 (Nov 3 - 9)
 
 ### Tasks Completed:
