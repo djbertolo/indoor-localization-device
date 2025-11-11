@@ -62,8 +62,8 @@
 
 #### Francisco Alvarez
 | Contribution | Date | Day of Week | Repository Commit ID |
-| - | - | - | - |
-| | | | |
+| Researched articles related to IEEE standards for low-rate wireless networks.  | 11/4 - 11/6 |  | Tuesday - Friday |
+| Created a shopping lsit of hardware that could be used for the project.| 11/4 | Tuesday | |
 
 #### Alejandro Armenta
 | Contribution | Date | Day of Week | Repository Commit ID |
