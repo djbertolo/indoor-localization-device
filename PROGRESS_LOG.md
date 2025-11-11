@@ -17,6 +17,7 @@
 #### Alejandro Armenta
 | Contribution | Date | Day of Week | Repository Commit ID |
 | - | - | - | - |
+| Starting literature review on last weeks studied topics | 11/10 | Monday | N/A
 
 
 #### Dominic Bertolo
@@ -67,7 +68,7 @@
 #### Alejandro Armenta
 | Contribution | Date | Day of Week | Repository Commit ID |
 | - | - | - | - |
-| | | | |
+| Reaserched Bluetooth Beacon articles and found potential article(s) to use as a literature review for upcoming presentation | 11/5 - 11/7 | Wednesday-Friday | N/A
 
 #### Dominic Bertolo
 | Contribution | Date | Day of Week | Repository Commit ID |
