@@ -1,4 +1,6 @@
-#include "tire-lib/include/tire/BLEFingerprinting.h"
+#include "tire/BLEFingerprinting.h"
+#include <fstream>
+#include <nlohmann/json.hpp>
 #include <cmath>	// For std::sqrt and std::pow
 #include <iostream> // For std::cout (debug/log messages)
 #include <vector>
@@ -34,52 +36,46 @@ namespace tire
 	}
 
 	// load_map()
-	bool BLEFingerpinting::load_map(const std::string &map_file_path)
-	{
-		// This is a PLACEHOLDER implementation.
-		// In the real version, you would use the 'nlohmann/json' library
-		// to parse the file at 'map_file_path' and populate 'fingerprint_map'.
+	bool BLEFingerpinting::load_map(const std::string &map_file_path) {
+        std::ifstream file(map_file_path);
+        if (!file.is_open()) {
+            std::cerr << "[BLEFingerprinting] Error: Could not open radio map file " << map_file_path << std::endl;
+            return false;
+        }
 
-		std::cout << "[BLEFingerpinting] WARNING: Using hard-coded placeholder map data." << std::endl;
-		std::cout << "[BLEFingerpinting] Real implementation will parse: " << map_file_path << std::endl;
+        try {
+            json j;
+            file >> j;
+            fingerprint_map.clear();
 
-		// Clear any existing map data
-		fingerprint_map.clear();
+            // Expected JSON Structure:
+            // { "fingerprints": [ 
+            //      { "rp_id": "...", "x": 0.0, "y": 0.0, "signals": { "BEACON_1": -50, "BEACON_2": -80 } } 
+            //   ] 
+            // }
 
-		// --- Create Fake Map Data ---
-		// Simulating a hallway with 3 reference points
+            for (const auto& item : j["fingerprints"]) {
+                RPFingerprint fp;
+                fp.rp_id = item["rp_id"];
+                fp.position.x = item["x"];
+                fp.position.y = item["y"];
 
-		// Reference Point 1 (Start of hallway)
-		RPFingerprint rp1;
-		rp1.rp_id = "RP_HALLWAY_START";
-		rp1.position = {0.0, 0.0};				   // (x=0, y=0)
-		rp1.signal_strengths["BEACON_ID_1"] = -50; // Close to Beacon 1
-		rp1.signal_strengths["BEACON_ID_2"] = -80;
-		rp1.signal_strengths["BEACON_ID_3"] = -90;
-		fingerprint_map.push_back(rp1);
+                if (item.contains("signals")) {
+                    for (auto& signal : item["signals"].items()) {
+                        fp.signal_strengths[signal.key()] = signal.value();
+                    }
+                }
+                fingerprint_map.push_back(fp);
+            }
 
-		// Reference Point 2 (Middle of hallway)
-		RPFingerprint rp2;
-		rp2.rp_id = "RP_HALLWAY_MIDDLE";
-		rp2.position = {0.0, 5.0}; // (x=0, y=5)
-		rp2.signal_strengths["BEACON_ID_1"] = -65;
-		rp2.signal_strengths["BEACON_ID_2"] = -65; // Equidistant to 1 and 2
-		rp2.signal_strengths["BEACON_ID_3"] = -85;
-		fingerprint_map.push_back(rp2);
+            std::cout << "[BLEFingerprinting] Loaded " << fingerprint_map.size() << " fingerprints." << std::endl;
+            return true;
 
-		// Reference Point 3 (End of hallway)
-		RPFingerprint rp3;
-		rp3.rp_id = "RP_HALLWAY_END";
-		rp3.position = {0.0, 10.0}; // (x=0, y=10)
-		rp3.signal_strengths["BEACON_ID_1"] = -90;
-		rp3.signal_strengths["BEACON_ID_2"] = -50; // Close to Beacon 2
-		rp3.signal_strengths["BEACON_ID_3"] = -80;
-		fingerprint_map.push_back(rp3);
-
-		// --- End of Fake Data ---
-
-		return true;
-	}
+        } catch (const json::parse_error& e) {
+            std::cerr << "[BLEFingerprinting] JSON Parse Error: " << e.what() << std::endl;
+            return false;
+        }
+    }
 
 	// find_closest_position()
 	Position2D BLEFingerpinting::find_closest_position(const std::vector<interfaces::BLEBeaconData> &current_scan)

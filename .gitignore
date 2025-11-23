@@ -258,3 +258,5 @@ __marimo__/
 
 # VSCode
 .vscode
+
+external/
