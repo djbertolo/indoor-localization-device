@@ -2,7 +2,7 @@
 #define TIRE_INTERFACES_SIMULATED_HARDWARE_H
 
 // Include the abstract base class we are implementing
-#include "tire-lib/include/tire/interfaces/HardwareInterface.h"
+#include "tire/interfaces/HardwareInterface.h"
 #include <vector>   // For std::vector
 #include <string>   // For std::string
 

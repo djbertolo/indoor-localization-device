@@ -5,7 +5,7 @@
 #include <memory>
 
 // Include TIRE Library Headers
-#include "tire/interfaces/SimulateHardware.h"
+#include "tire/interfaces/SimulatedHardware.h"
 #include "tire/interfaces/RaspberryPiHardware.h" // Only compiles on Linux usually, but we include for logic
 #include "tire/NavigationGraph.h"
 #include "tire/PDR.h"

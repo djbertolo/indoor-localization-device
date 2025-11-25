@@ -7,6 +7,7 @@ add_library(tire-lib
     private/Announcer.cpp
     private/interfaces/SimulatedHardware.cpp
     # private/interfaces/RaspberryPiHardware.cpp # Uncomment this when you add the file
+	private/Pathfinder.cpp
 )
 
 # Allow other targets (like the app) to include headers from the 'include' folder

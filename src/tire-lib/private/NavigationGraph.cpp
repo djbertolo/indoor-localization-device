@@ -1,54 +1,79 @@
-#ifndef TIRE_NAVIGATION_GRAPH_H
-#define TIRE_NAVIGATION_GRAPH_H
+#include "tire/NavigationGraph.h"
+#include <fstream>
+#include <iostream>
+#include <cmath>
+#include <nlohmann/json.hpp> // Requires the nlohmann_json library
 
-#include <string>
-#include <vector>
-#include <map>
-#include "tire/BLEFingerprinting.h" // For Position2D
+using json = nlohmann::json;
 
 namespace tire {
 
-    struct GraphNode {
-        std::string id;         // "RP_HALLWAY_1"
-        Position2D position;    // {x, y}
-        std::string name;       // "Main Hallway North"
-        std::string audio_file; // "guidance_hallway_north.wav"
-        
-        // Adjacency list: Neighbor Node ID -> Distance (Weight)
-        std::map<std::string, double> neighbors; 
-    };
+    NavigationGraph::NavigationGraph() {}
 
-    class NavigationGraph {
-    public:
-        NavigationGraph();
+    bool NavigationGraph::load_from_json(const std::string& file_path) {
+        std::ifstream file(file_path);
+        if (!file.is_open()) {
+            std::cerr << "[NavigationGraph] Error: Could not open map file " << file_path << std::endl;
+            return false;
+        }
 
-        /**
-         * @brief Loads map data from a JSON file.
-         * @param file_path Path to the .json map file.
-         * @return true if successful.
-         */
-        bool load_from_json(const std::string& file_path);
+        try {
+            json j;
+            file >> j;
 
-        /**
-         * @brief Retrieves a node by its ID.
-         */
-        GraphNode* get_node(const std::string& id);
+            nodes.clear();
 
-        /**
-         * @brief Returns all nodes (useful for finding the closest start node).
-         */
-        const std::map<std::string, GraphNode>& get_all_nodes() const;
+            // Expected JSON structure: { "nodes": [ { "id": "...", "x": 0.0, "y": 0.0, ... } ] }
+            if (j.contains("nodes") && j["nodes"].is_array()) {
+                for (const auto& item : j["nodes"]) {
+                    GraphNode node;
+                    node.id = item.value("id", "");
+                    node.name = item.value("name", "Unknown");
+                    node.audio_file = item.value("audio", "");
+                    node.position.x = item.value("x", 0.0);
+                    node.position.y = item.value("y", 0.0);
 
-        /**
-         * @brief Calculates Euclidean distance between two nodes.
-         */
-        double get_distance(const std::string& id_a, const std::string& id_b);
+                    // Parse Neighbors if available
+                    if (item.contains("neighbors") && item["neighbors"].is_object()) {
+                        for (auto& neighbor : item["neighbors"].items()) {
+                            node.neighbors[neighbor.key()] = neighbor.value();
+                        }
+                    }
 
-    private:
-        // Map of NodeID -> Node Object
-        std::map<std::string, GraphNode> nodes;
-    };
+                    nodes[node.id] = node;
+                }
+            }
+            
+            std::cout << "[NavigationGraph] Loaded " << nodes.size() << " nodes from " << file_path << std::endl;
+            return true;
+
+        } catch (const json::parse_error& e) {
+            std::cerr << "[NavigationGraph] JSON Parse Error: " << e.what() << std::endl;
+            return false;
+        }
+    }
+
+    GraphNode* NavigationGraph::get_node(const std::string& id) {
+        auto it = nodes.find(id);
+        if (it != nodes.end()) {
+            return &(it->second);
+        }
+        return nullptr;
+    }
+
+    const std::map<std::string, GraphNode>& NavigationGraph::get_all_nodes() const {
+        return nodes;
+    }
+
+    double NavigationGraph::get_distance(const std::string& id_a, const std::string& id_b) {
+        GraphNode* a = get_node(id_a);
+        GraphNode* b = get_node(id_b);
+
+        if (!a || !b) return -1.0;
+
+        double dx = a->position.x - b->position.x;
+        double dy = a->position.y - b->position.y;
+        return std::sqrt(dx*dx + dy*dy);
+    }
 
 } // namespace tire
-
-#endif // TIRE_NAVIGATION_GRAPH_H
