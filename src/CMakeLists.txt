@@ -12,5 +12,5 @@ add_subdirectory(external/json)
 
 # --- 2. Internal Source Code ---
 # Process the library first so the app can link to it
-add_subdirectory(src/tire-lib)
-add_subdirectory(src/app)
+add_subdirectory(tire-lib)
+add_subdirectory(app)

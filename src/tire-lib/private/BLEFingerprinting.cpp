@@ -44,7 +44,7 @@ namespace tire
         }
 
         try {
-            json j;
+            nlohmann::json j;
             file >> j;
             fingerprint_map.clear();
 
@@ -71,7 +71,7 @@ namespace tire
             std::cout << "[BLEFingerprinting] Loaded " << fingerprint_map.size() << " fingerprints." << std::endl;
             return true;
 
-        } catch (const json::parse_error& e) {
+        } catch (const nlohmann::json::parse_error& e) {
             std::cerr << "[BLEFingerprinting] JSON Parse Error: " << e.what() << std::endl;
             return false;
         }

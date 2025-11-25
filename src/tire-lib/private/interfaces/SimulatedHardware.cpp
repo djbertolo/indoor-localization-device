@@ -1,4 +1,4 @@
-#include "tire-lib/include/tire/interfaces/SimulateHardware.h"
+#include "tire-lib/include/tire/interfaces/SimulatedHardware.h"
 #include <iostream>     // For std::cout (simulating audio, initialization)
 #include <chrono>       // For std::chrono (simulating time delays)
 #include <thread>       // For std::this_thread::sleep_for (simulating delays)
